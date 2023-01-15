@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <title>Posjetitelj</title>
+
+</head>
+<body>
+
+    <div class="cover"> </div>
+
+    <div class="naslov-pt3" style="height: 200px; ">
+      <h1 style="font-size:80px; height: 100px;">POSJETITELJ</h1>
+    </div> 
+
+            <form action="/posjetitelj/dodajpos" method="POST" class="form-control form-control-lg">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="idpos" style="color:white; font-family:Sitka Banner Semibold; "><h2>ID</h2></label>
+                        <input type="number" name="idpos" style="color:white;" class="form-control input::placeholder" id="idpos" placeholder="Unesite ID" value="{{request.form.id}}"required>
+                    </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="imepos" style="color:white;font-family:Sitka Banner Semibold;"><h2>Ime</h2></label>
+                    <input type="text" name="imepos" style="color:white;" class="form-control" id="imepos" placeholder="Unesite ime" value="{{request.form.ime}}"required>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="prezimepos" style="color:white;font-family:Sitka Banner Semibold;"><h2>Prezime</h2></label>
+                    <input type="text" name="prezimepos" style="color:white;" class="form-control" id="prezimepos" placeholder="Unesite prezime" value="{{request.form.prezime}}"required>
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                      <label for="oibpos" style="color:white;font-family:Candara Italic;"><h2>OIB</h2></label>
+                      <input type="number" name="oibpos" style="color:white;" class="form-control" id="oibpos" placeholder="Unesite OIB">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label for="dobpos" style="color:white;font-family:Candara Italic;"><h2>Dob</h2></label>
+                      <input type="number" name="dobpos" style="color:white;" class="form-control" id="dobpos" placeholder="Unesite dob">
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="font-family:Candara Italic;" type="submit"><h2>Pošalji</h2></button>
+            </form>
+        </div> 
+        
+        
+        
+        <div class="stuff-pt2" style="color:white; font-family:Sitka Banner Semibold; font-size:30px; ">
+            <button class="btn btn-primary" data-toggle="collapse" data-target="#contentpos"> <h1 style="font-family:Sitka Banner Semibold;">Relacija: <i>posjetitelj</i></h1> </button> <a class="nav-item nav-link" id="sponzor" href="/pocetak">Početna</a>
+            <div class="collapse" id="contentpos">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Id:</th>
+                        <th scope="col">Ime:</th>
+                        <th scope="col">Prezime:</th>
+                        <th scope="col">OIB:</th>
+                        <th scope="col">Dob:</th>
+                      </tr>
+                    </thead> 
+                    <tbody>
+                      {% for i in range(0, lendata) %}
+                      <tr>
+                        <td>{{data[i][0]}}</td>
+                        <td>{{data[i][1]}}</td>
+                        <td>{{data[i][2]}}</td>
+                        <td>{{data[i][3]}}</td>
+                        <td>{{data[i][4]}}</td>
+                      </tr>
+                      {%endfor%}
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    
+</body>
+</html>

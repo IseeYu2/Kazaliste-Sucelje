@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <title>Statistika</title>
+
+</head>
+
+<body>
+    
+    <div class="cover"> </div>
+
+    <div class="naslov-pt3" style="height: 200px; ">
+      <h1 style="font-size:80px; height: 100px;">STATISTIKA</h1>
+    </div> 
+
+    <div style="margin-left:40px;">
+
+        <h2 style="font-family:Sitka Banner Semibold; color:rgb(197, 187, 187)">Upit koji će prikazati ime i prezime radnika koji je izdao najviše računa, te <br> ime i prezime posjetitelja koji je najviše puta iskoristio promociju
+            i informacije o <br>promociji kao i broj računa: </h2>
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#contentstat"> <h1 style="font-family:Sitka Banner Semibold;">Prikaz upita:</h1></button>
+        <div class="collapse" id="contentstat">
+            <br>
+            <h2 style="color:rgb(255, 255, 255); font-family:Sitka Banner Semibold;"> SELECT zaposlenik.ime, zaposlenik.prezime, posjetitelj.ime, posjetitelj.prezime, promocija.opis, </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> racun.broj_racuna, racun.datum_izdavanja, COUNT(racun.id) AS bro_izdanih</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> FROM racun </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> JOIN zaposlenik ON racun.id_zaposlenik = zaposlenik.id</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> JOIN posjetitelj ON racun.id_posjetitelj = posjetitelj.id</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> JOIN promocija ON racun.id_promocija = promocija.id</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> WHERE promocija.opis='Rođendan kazališta';</h2>
+            <br>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div style="margin-left:40px;">
+
+        <h2 style="font-family:Sitka Banner Semibold; color:rgb(197, 187, 187)">Upit koji će prikazati top 3 iskorištene promocije i koliko je puta iskorištena u broju i postotku <br> </h2>
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#contentbok"> <h1 style="font-family:Sitka Banner Semibold;">Prikaz upita:</h1></button>
+        <div class="collapse" id="contentbok">
+            <br>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT promocija.opis, COUNT(promocija.id) as broj_pojavljivanja, </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">(COUNT(promocija.id) / (SELECT COUNT(*) FROM racun)) * 100 AS postotak_pojavljivanja</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> FROM promocija</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> JOIN racun ON promocija.id = racun.id_promocija</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> GROUP BY promocija.opis</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> ORDER BY broj_pojavljivanja DESC</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> LIMIT 3;</h2>
+            <br>
+        </div>
+    </div>
+   
+    <img src="/static/img/Graf1.png" alt="Graf" style="margin-left: 40px" width="700" height="500">
+
+    <br>
+    <br>
+    <div style="margin-left:40px;">
+        <h2 style="font-family:Sitka Banner Semibold; color:rgb(197, 187, 187)">Upit koji prikazuje postotak artikala koji su na raspolaganju, te njihov datum izdavanja <br> </h2>
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#contentsql"> <h1 style="font-family:Sitka Banner Semibold;">Prikaz upita:</h1></button>
+        <div class="collapse" id="contentsql">
+            <br>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT artikl.naziv, COUNT(artikl.id) AS na_raspolaganju, </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">(COUNT(artikl.id) / (SELECT COUNT(*) FROM racun join artikl on racun.id_promocija = artikl.id_promocija)) * 100 AS postotak, racun.datum_izdavanja</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">FROM artikl</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">INNER JOIN racun ON artikl.id_promocija = racun.id_promocija</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">GROUP BY artikl.naziv</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">ORDER BY na_raspolaganju DESC</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">LIMIT 3;</h2>
+            <br>
+        </div>
+    </div>
+
+    <img src="/static/img/Graf2.png" alt="Graf" style="margin-left: 40px" width="700" height="500">
+    <br>
+    <br>
+    <div style="margin-left:40px;">
+
+        <h2 style="font-family:Sitka Banner Semibold; color:rgb(197, 187, 187)">Upit koji prikazuje inventar artikala u kazalištu <br> </h2>
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#contentstuff"> <h1 style="font-family:Sitka Banner Semibold;">Prikaz upita:</h1></button>
+        <div class="collapse" id="contentstuff">
+            <br>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> SELECT artikl.naziv, artikl.cijena, stavka_racun.kolicina, </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> COUNT(artikl.id) AS na_raspolaganju, (COUNT(artikl.id) / (SELECT COUNT(*) FROM racun INNER JOIN artikl ON racun.id_promocija = artikl.id_promocija)) * 100 AS postotak, racun.datum_izdavanja</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  FROM racun </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   INNER JOIN stavka_racun ON racun.id = stavka_racun.id_racun</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  INNER JOIN artikl ON stavka_racun.id_artikl = artikl.id</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  INNER JOIN promocija ON racun.id_promocija = promocija.id</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  GROUP BY artikl.naziv, artikl.cijena, stavka_racun.kolicina;</h2>
+            <br>
+        </div>
+    </div>  
+    <img src="/static/img/Graf3.png" alt="Graf" style="margin-left: 40px" width="700" height="500">
+
+    <br>
+    <a class="nav-item nav-link" id="pocetna" href="/pocetak" style="margin-left:40px; font-family:Sitka Banner Semibold; font-size:30px; align:left;">Početna</a>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <title>Procedura</title>
+
+</head>
+<body>
+
+    <div class="cover"> </div>
+
+    <div class="naslov-pt3" style="height: 200px; ">
+      <h1 style="font-size:80px; height: 100px;">PROCEDURE</h1>
+    </div> 
+
+    <div style="margin-left:40px;">
+
+        <h2 style="font-family:Sitka Banner Semibold; color:white">Povečanje plaće radnicima koji rade duže od 4 godine i 5 mjeseci za 10%: </h2>
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#contentproc"> <h1 style="font-family:Sitka Banner Semibold;">Prikaz procedure</h1></button>
+        <div class="collapse" id="contentproc">
+            <br>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  DELIMITER //</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  CREATE PROCEDURE povecaj_place(postotak DECIMAL(8, 2))</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  BEGIN</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  UPDATE zaposlenik</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  SET placa = placa * (1 + postotak/100)</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  where datum_zaposlenja< trenutni datum - interval 4 year + interval 5 month; </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> END // </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> DELIMITER ;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> CALL povecaj_place(10);</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> select * from zaposlenik;</h2>
+            <br>
+        </div>
+ 
+        <form action="/procedura">
+            <button class="btn btn-primary" type="submit" name="povpl" style="font-family:Sitka Banner Semibold;"><h2><i>Povećaj iznos</i></h2></button>
+        </form>
+    </div>
+    <br>
+
+
+    <!-- </div> -->
+    <br>
+    <div style="margin-left:40px;">
+        <h2 style="font-family:Sitka Banner Semibold; color:white">Unos novog zaposlenika i posjetitelja putem procedura i transakcija: </h2>
+
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#contentdot"> <h1 style="font-family:Sitka Banner Semibold;">Prikaz procedure</h1></button>
+        <div class="collapse" id="contentdot">
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> DELIMITER //</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> CREATE PROCEDURE nova_osoba(p_id INTEGER, p_ime VARCHAR(10), p_prezime VARCHAR(15), p_OIB CHAR(11), p_dob INTEGER, p_broj_telefona VARCHAR(50), p_email VARCHAR(50), p_datum_zaposlenja DATE,p_placa INTEGER)</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> BEGIN</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">  DECLARE EXIT HANDLER FOR 1062</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   BEGIN   </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">    ROLLBACK;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">    SELECT CONCAT('"Zaposlenik sa oibom: "',p_oib,'" već postoji!"');</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   END;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   DECLARE EXIT HANDLER FOR SQLEXCEPTION</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   BEGIN</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   ROLLBACK;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   SELECT 'Pojavila se greška';</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   END;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED ;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   START TRANSACTION;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">    INSERT INTO zaposlenik VALUES(p_id, p_ime, p_prezime, p_OIB, p_dob, p_broj_telefona, p_email, p_datum_zaposlenja, p_placa);</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">    INSERT INTO posjetitelj VALUES(p_id, p_ime, p_prezime, p_OIB, p_dob);</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">   COMMIT;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">END//</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">DELIMITER ;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">CALL nova_osoba(1343,'Leon','Smolica','12365678901',19,1914339467,'leon.smolica@gmail.com',STR_TO_DATE('04.12.2019.','%d.%m.%Y.'),2900);</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT * FROM posjetitelj;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT * FROM zaposlenik;</h2>
+            <br>
+        </div>
+ 
+        <form action="/procedura">
+            <button class="btn btn-primary" type="submit" name="unzap" style="font-family:Sitka Banner Semibold;"><h2><i>Unesi</i></h2></button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <div style="margin-left:40px;">
+        <h2 style="font-family:Sitka Banner Semibold; color:white">Unos novog zaposlenika i računa putem procedura i transakcija: </h2>
+
+
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#contentrac"> <h1 style="font-family:Sitka Banner Semibold;">Prikaz procedure</h1></button>
+        <div class="collapse" id="contentrac">
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">DELIMITER //</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> CREATE PROCEDURE nova_osoba_i_racun(p_id INTEGER, p_ime VARCHAR(10), p_prezime VARCHAR(15), p_OIB CHAR(11),</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">p_dob INTEGER, p_broj_telefona VARCHAR(50), p_email VARCHAR(50), p_datum_zaposlenja DATE,p_placa INTEGER,</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">p_id_racun INTEGER, p_id_zaposlenik_racun INTEGER, p_id_promocija INTEGER, p_id_posjetitelj INTEGER, p_broj_racuna VARCHAR(50),</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">p_datum_izdavanja DATETIME )</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">BEGIN</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> DECLARE EXIT HANDLER FOR 1062 </h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">BEGIN</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">SAVEPOINT zaposlenik_racun;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">ROLLBACK TO SAVEPOINT zaposlenik_racun;</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">COMMIT;</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT CONCAT('Račun sa brojem "', p_broj_racuna, '" već postoji, ali je kupac uspješno</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">spremljen.');</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">END;</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">DECLARE EXIT HANDLER FOR SQLEXCEPTION</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">BEGIN</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;"> ROLLBACK TO SAVEPOINT zaposlenik_racun;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> COMMIT;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT 'Pojavila se greška';</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;"> END;</h2>
+              <h2 style="color:white; font-family:Sitka Banner Semibold;">   SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;</h2>
+              <h2 style="color:white; font-family:Sitka Banner Semibold;">  START TRANSACTION;</h2>
+              <h2 style="color:white; font-family:Sitka Banner Semibold;"> SAVEPOINT zaposlenik_racun;</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">   INSERT INTO zaposlenik VALUES(p_id, p_ime, p_prezime, p_OIB, p_dob, p_broj_telefona, p_email, p_datum_zaposlenja, p_placa);</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">   INSERT INTO racun VALUES(p_id_racun, p_id_zaposlenik_racun, p_id_promocija, p_id_posjetitelj, p_broj_racuna, p_datum_izdavanja);</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;"> COMMIT;</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">END //</h2>
+              <h2 style="color:white; font-family:Sitka Banner Semibold;"> DELIMITER ;</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT * FROM zaposlenik;</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;">SELECT * FROM racun;</h2>
+             <h2 style="color:white; font-family:Sitka Banner Semibold;"> CALL nova_osoba_i_racun(1345,'Lovro','Smolica','9236967899',19,2914339467,'lovro.smolica@gmail.com',STR_TO_DATE('04.12.2019.','%d.%m.%Y.'),2900,800,1345,1500,1600,'54000',STR_TO_DATE('16.10.2020.', '%d.%m.%Y.'));</h2>
+            <h2 style="color:white; font-family:Sitka Banner Semibold;"> CALL nova_osoba_i_racun(1345,'Lovro','Smolica','9236967899',19,2914339467,'lovro.smolica@gmail.com',STR_TO_DATE('04.12.2019.','%d.%m.%Y.'),2900,800,1345,1500,1600,'54000',STR_TO_DATE('16.10.2020.', '%d.%m.%Y.'));</h2>
+            <br>
+        </div>
+
+        <form action="/procedura">
+            <button class="btn btn-primary" type="submit" name="unrac" style="font-family:Sitka Banner Semibold;"><h2><i>Unesi</i></h2></button>
+        </form>
+    </div>
+
+    <br>
+    <a class="nav-item nav-link" id="pocetna" href="/pocetak" style="font-size:30px; margin-left:25px; font-family:Sitka Banner Semibold;">Početna</a>
+
+</body>
+</html>

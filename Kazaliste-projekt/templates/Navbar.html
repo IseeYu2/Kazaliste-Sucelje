@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/static/styles/home.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link 
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"/>
+    <link       
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+    <title>{% block title %}Kazalište{% endblock %}</title>
+</head>
+
+<body class="pocetna" style="height: 500px">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+             <span class="navbar-toggle-icon"></span>            
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" id="pocetna" href="/pocetak">Početna</a>
+                <a class="nav-item nav-link" id="procedura" href="/procedura">Procedure</a>
+                <a class="nav-item nav-link" id="zaposlenik" href="/zaposlenik">Zaposlenik</a>
+                <a class="nav-item nav-link" id="posjetitelj" href="/posjetitelj">Posjetitelj</a>
+                <a class="nav-item nav-link" id="racun" href="/racun">Račun</a>
+                <a class="nav-item nav-link" id="sponzor" href="/sponzor">Sponzor</a>  
+                <a class="nav-item nav-link" id="glumac" href="/glumac">Glumac</a>
+                <a class="nav-item nav-link" id="statistika" href="/statistika">Statistika</a>
+                <a class="nav-item nav-link" id="odjava" href="/">Odjava</a>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %} 
+
+    {% endblock %}
+  
+</body>
+
+</html>

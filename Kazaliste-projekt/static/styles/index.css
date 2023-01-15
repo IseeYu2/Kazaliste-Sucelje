@@ -1,0 +1,105 @@
+*
+{
+    background: url("/static/img/7.jpg");
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+}
+
+
+.cover
+{ 
+    border-radius: 10px;
+    width: 100%;
+    background-attachment: fixed;
+    background-size: cover; 
+    color:white;
+}
+
+
+.data
+{ 
+    margin-left: 15%;
+    padding-top: 10%;
+    height: 100%;
+}
+
+
+.stuff
+{   
+    font-family:Sitka Banner Semibold;
+ 
+    color: black;
+    margin-top: 40px;
+    margin-right: 20%;
+    margin-left: 20%;
+    background-color: rgb(206, 199, 199);
+    border-radius: 15px;
+    height: auto;
+}
+
+
+.naslov
+{   
+    font-family:Sitka Banner Semibold;
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    padding-top: 90px;
+}
+
+.naslov-pt2
+{   
+    font-family:Sitka Banner Semibold;
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    padding-top: 90px;
+    padding-bottom: 60px;
+}
+
+
+.naslov-pt3
+{   
+    font-family:Sitka Banner Semibold;
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    padding-top: 45px;
+    padding-bottom: 60px;
+    
+}
+
+
+.pocetna
+{
+    background: url("/static/img/3.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+}
+
+.stuff-pt2
+{   
+    font-family:Sitka Banner Semibold;
+    padding: 30px;
+    color: black;
+    margin-top: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 35px;
+    background-color: rgb(206, 199, 199);
+    border-radius: 15px;
+    height: auto;
+}
+
+
+.slika
+{
+    background: url("/static/img/Graf3.png");
+    
+
+
+
+}

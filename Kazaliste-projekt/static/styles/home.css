@@ -1,0 +1,96 @@
+.boy
+{
+    background: url("/static/img/7.jpg");
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+}
+
+
+.cover1
+{ 
+    border-radius: 10px;
+    width: 100%;
+    background-attachment: fixed;
+    background-size: cover; 
+    color:white;
+}
+
+
+.data
+{ 
+    margin-left: 15%;
+    padding-top: 10%;
+    height: 100%;
+}
+
+
+.stuff
+{   
+    font-family:Sitka Banner Semibold;
+    padding: 30px;
+    color: black;
+    margin-top: 40px;
+    margin-right: 20%;
+    margin-left: 20%;
+    background-color: rgb(206, 199, 199);
+    border-radius: 15px;
+    height: auto;
+}
+
+
+.naslov
+{   
+    font-family:Sitka Banner Semibold;
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    padding-top: 90px;
+}
+
+
+.pocetna
+{
+    background: url("/static/img/9.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 93%;
+    background-position-x: center; 
+    background-color: rgb(4, 4, 42);
+}
+
+
+.cover2
+{ 
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin-top: 10px;
+    margin-right: 10px;
+    background: url("/static/img/3.jpeg");
+    background-repeat: no-repeat;
+    position: relative;
+    top: 60px;
+    left: 100px;
+    background-color: #1A120B;
+    background-size: cover;
+    height: 620px;
+    width: 900px;
+}
+
+.cover
+{ 
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin-top: 10px;
+    margin-right: 10px;
+    background: url("/static/img/9.jpg");
+    background-repeat: no-repeat;
+    position: relative;
+    top: 60px;
+    left: 480px;
+    background-color: #1A120B;
+    background-size: cover;
+    height: 620px;
+    width: 900px;
+}
